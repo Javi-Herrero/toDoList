@@ -1,0 +1,92 @@
+body {
+  min-height: 420px;
+  min-width: 320px;
+}
+
+form {
+  padding-top: 3vh;
+  display: flex;
+  justify-content: center;
+  gap: 2vh;
+}
+form input,
+form button {
+  border-radius: 3px;
+  border: 2px solid #000;
+  font-size: 16px;
+}
+form input {
+  padding: 1.3vh;
+  width: 50vh;
+}
+
+#toDoList {
+  display: block;
+  margin-top: 5vh;
+  padding: 2px;
+}
+#toDoList .item {
+  width: 85vh;
+  border-radius: 8px;
+  border: 2px solid #000;
+  display: flex;
+  justify-content: space-around;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  transition: transform 450ms;
+}
+#toDoList .item input[type=checkbox] {
+  position: relative;
+  cursor: pointer;
+  margin: 2%;
+  margin-right: 4%;
+}
+#toDoList .item input[type=checkbox]:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: auto;
+  left: auto;
+  top: 20px;
+  left: 0;
+  border: 2px solid #555555;
+  border-radius: 3px;
+  background-color: white;
+}
+#toDoList .item input[type=checkbox]:checked:after {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 10px;
+  border: solid black;
+  border-width: 0 2px 2px 0;
+  transform: rotate(55deg) scale(3);
+  position: absolute;
+  top: 1vh;
+  left: 15px;
+}
+#toDoList .item .textArea {
+  background-color: rgb(221, 221, 221);
+  width: 80%;
+}
+#toDoList .item .textArea h1 {
+  font-size: 24px;
+  text-align: center;
+}
+#toDoList .item button {
+  cursor: pointer;
+  margin: 0;
+  background-image: url("./bin.png");
+  background-position: center;
+  background-color: transparent;
+  border: 0 transparent;
+  width: 12vh;
+  background-repeat: no-repeat;
+}
+#toDoList .item button:active {
+  background-image: url("./binActive.png");
+}/*# sourceMappingURL=style.css.map */

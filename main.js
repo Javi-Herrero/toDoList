@@ -4,14 +4,28 @@ let currentTasks = new Map();
 
 const addTaskToDb = async () => {
     let task = textField.value;
-    currentTasks.has(task) ? alert(`${task} already exists. Please enter a new task`) : showTaskInUi(task)
     let toDo = { description: task, done: false }
     textField.value = '';
-    let id = await postItem(toDo)
-    currentTasks.set(task, id._id)
+    await postItem(toDo)
+
+    getAndShowToDos()
 };
 
+const getAndShowToDos = async () => {
+    currentTasks.clear()
+    const toDos = await getAll();
+    Array.from(toDoList.childNodes).forEach(item => {
+        item.remove()
+    });
+    toDos.forEach(task => {
+        showTaskInUi(task.description)
+        currentTasks.set(task.description, task._id)
+
+    });
+}
+getAndShowToDos()
 const showTaskInUi = (task) => {
+
     if (task != "") {
         let article, input, div, h1, button;
         const elements = ['article', 'input', 'div', 'h1', 'button'];
@@ -60,13 +74,14 @@ const markAsDone = (e) => {
 const removeTaskFromUi = (e) => {
     let listItem = e.target.parentNode
     let check = listItem.children[0].checked;
-    check ? (listItem.style = ' transform: translateX(-950px);', setTimeout(() => { listItem.remove() }, 250)) : alert('An item must be checked as done before removal')
     let task = listItem.children[1].firstChild.innerHTML;
-    removeTaskFromDb(task)
+    check ? (listItem.style = ' transform: translateX(-950px);', setTimeout(() => { removeTaskFromDb(task) }, 250)) : alert('You should have completed a task before removing it from the list!')
+
 }
-const removeTaskFromDb = (task) => {
+const removeTaskFromDb = async (task) => {
     let id = currentTasks.get(task)
-    deleteItem(id, task)
+    await deleteItem(id, task)
+    getAndShowToDos()
 }
 
 const toDoList = document.querySelector('#toDoList');

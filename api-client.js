@@ -45,8 +45,8 @@ const getAll = async () => {
         });
         let itemReady = await itemRaw.json();
         dbAll = itemReady;
-        console.log(`all items ${dbAll}`)
 
+        return dbAll
     } catch (error) {
         console.log(error)
     }
